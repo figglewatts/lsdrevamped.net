@@ -2,6 +2,14 @@ name: CD
 on:
   push:
     branches: [master]
+env:
+  TF_BACKEND_BUCKET: ${{ secrets.tf_backend_bucket }}
+  TF_BACKEND_ACCESS_KEY: ${{ secrets.tf_backend_access_key }}
+  TF_BACKEND_SECRET_KEY: ${{ secrets.tf_backend_secret_key }}
+  TF_VAR_client_id: ${{ secrets.azure_client_id }}
+  TF_VAR_client_secret: ${{ secrets.azure_client_secret }}
+  TF_VAR_subscription_id: ${{ secrets.azure_subscription_id }}
+  TF_VAR_tenant_id: ${{ secrets.azure_tenant_id }}
 jobs:
   deploy:
     runs-on: ubuntu-latest
