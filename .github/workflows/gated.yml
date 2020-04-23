@@ -1,0 +1,15 @@
+name: Gated
+on:
+  pull_request:
+    branches: [master]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Terraform format
+        run: terraform fmt infra -check
+      - name: Terraform init
+        run: terraform init infra --input=false -backend=false
+      - name: Terraform validate
+        run: terraform validate infra

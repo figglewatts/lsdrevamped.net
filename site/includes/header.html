@@ -1,0 +1,28 @@
+<header class="h-auto">
+    <div>
+        <a href="index.html" class="text-decoration-none d-none d-sm-block">
+            <img class="logo" src="./img/logo-trans.png"/>
+            <h1 class="d-inline align-middle">{{.Title}}</h1>
+            <img class="logo" src="./img/logo-trans.png"/>
+        </a>
+        <a href="index.html" class="d-sm-none">
+            <img class="w-50" src="./img/logo-trans.png"/>
+        </a>
+    </div>
+    <nav class="container h-auto">
+        <div class="row justify-content-center">
+            <a class="col-sm" href="./index.html">Home</a>
+            {{range .Pages}}
+            <a class="col-sm" href="{{.Name}}.html">{{Title .Name}}</a>
+            {{end}}
+        </div>
+    </nav>
+    <hr>
+    <nav class="container h-auto">
+        <div class="row justify-content-center">
+            {{range .FooterLinks}}
+            <a class="col-sm-2" target="_blank" href="{{.Target.String}}">{{.Text}}</a>
+            {{end}}
+        </div>
+    </nav>
+</header>

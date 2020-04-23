@@ -1,0 +1,93 @@
+/* ----- SITEWIDE STYLING ----- */
+html {
+    background-image: url("../img/bg-a.png");
+    background-size: 20%;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 50em;
+    margin: 0 auto;
+    padding-left: 3em;
+    padding-right: 3em;
+    background-color: #000000;
+    font-family: serif;
+    text-align: center;
+    color: white;
+    image-rendering: auto;
+}
+
+hr {
+    display: block;
+    margin: 0.5em auto;
+    border-style: inset;
+    border-width: 1px;
+    clear: both;
+}
+
+p.weird-red-intro {
+    color: #AF0000;
+}
+
+/* ----- UTILITY CLASSES ----- */
+.inline {
+    display: inline;
+}
+
+/* ----- HEADER STYLING ----- */
+body header {
+    height: 7em;
+    margin-top: 1em;
+    margin-bottom: 2.5em;
+}
+
+img.logo {
+    width: auto;
+    height: 5em;
+}
+
+nav {
+    height: 2em;
+}
+
+nav a {
+    text-transform: uppercase;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+nav a.headernav-left {
+    float: left;
+}
+
+nav a.headernav-left:first-child {
+    margin-left: 0;
+}
+
+nav a.headernav-right {
+    float: right;
+}
+
+nav a.headernav-right:first-child {
+    margin-right: 0;
+}
+
+/* ----- ARTICLE STYLING ----- */
+body article {
+    flex: 1;
+}
+
+/* ----- FOOTER STYLING ----- */
+body footer {
+    height: auto;
+}
+
+footer > div {
+    margin-bottom: 1em;
+}

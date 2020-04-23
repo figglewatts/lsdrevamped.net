@@ -34,8 +34,5 @@ override.tf.json
 
 # End of https://www.gitignore.io/api/terraform
 
-gcp-key.json
-terraform.auto.tfvars
+terraform.tfvars
 backend-config.tfvars
-site_instance_key
-site_instance_key.pub

@@ -1,0 +1,21 @@
+name: CD
+on:
+  push:
+    branches: [master]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Terraform format
+        run: terraform fmt infra -check
+      - name: Terraform init
+        run: |
+          terraform init infra --input=false \
+            -backend-config "bucket=$TF_BACKEND_BUCKET" \
+            -backend-config "access_key=$TF_BACKEND_ACCESS_KEY" \
+            -backend-config "secret_key=$TF_BACKEND_SECRET_KEY"
+      - name: Terraform plan
+        run: terraform plan infra --out=tfplan --input=false
+      - name: Terraform apply
+        run: terraform apply tfplan --input=false

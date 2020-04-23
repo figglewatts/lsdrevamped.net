@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+{{template "head.html" .}}
+
+<body>
+    {{template "header.html" .Site}}
+
+    <article>
+        {{.Content}}
+    </article>
+
+    {{template "footer.html" .Site}}
+
+    {{template "scripts.html" .}}
+</body>
