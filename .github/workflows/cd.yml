@@ -16,14 +16,15 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Terraform format
-        run: terraform fmt infra -check
+        run: terraform fmt -check infra
       - name: Terraform init
         run: |
-          terraform init infra --input=false \
+          terraform init --input=false \
             -backend-config "bucket=$TF_BACKEND_BUCKET" \
             -backend-config "access_key=$TF_BACKEND_ACCESS_KEY" \
-            -backend-config "secret_key=$TF_BACKEND_SECRET_KEY"
+            -backend-config "secret_key=$TF_BACKEND_SECRET_KEY" \
+            infra
       - name: Terraform plan
-        run: terraform plan infra --out=tfplan --input=false
+        run: terraform plan --out=tfplan --input=false infra
       - name: Terraform apply
-        run: terraform apply tfplan --input=false
+        run: terraform apply --input=false tfplan

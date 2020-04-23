@@ -8,8 +8,8 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: Terraform format
-        run: terraform fmt infra -check
+        run: terraform fmt -check infra
       - name: Terraform init
-        run: terraform init infra --input=false -backend=false
+        run: terraform init --input=false -backend=false infra
       - name: Terraform validate
         run: terraform validate infra
