@@ -11,6 +11,15 @@ terraform {
   }
 }
 
+provider "digitalocean" {
+  version = "=1.16.0"
+
+  spaces_access_id  = var.digitalocean_spaces_key
+  spaces_secret_key = var.digitalocean_spaces_secret_key
+
+  token = var.digitalocean_token
+}
+
 provider "azurerm" {
   version = "=2.6.0"
 
@@ -22,7 +31,3 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "example" {
-  name     = "rg-lsdr-site"
-  location = "UK South"
-}

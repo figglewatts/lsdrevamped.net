@@ -13,3 +13,15 @@ variable "tenant_id" {
 variable "client_secret" {
   type = string
 }
+
+variable "digitalocean_token" {
+  type = string
+}
+
+variable "digitalocean_spaces_key" {
+  type = string
+}
+
+variable "digitalocean_spaces_secret_key" {
+  type = string
+}
