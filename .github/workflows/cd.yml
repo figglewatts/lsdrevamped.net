@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+
       - name: Terraform format
         run: terraform fmt -check infra
       - name: Terraform init
@@ -31,3 +32,25 @@ jobs:
         run: terraform plan --out=tfplan --input=false infra
       - name: Terraform apply
         run: terraform apply --input=false tfplan
+      
+      - name: Set up Go version
+        uses: actions/setup-go@v2
+        with:
+          go-version: "1.14.1"
+      - name: Generate site with daybookr
+        run: |
+          go get -u github.com/figglewatts/daybookr/cmd/daybookr
+          daybookr generate site
+
+      - name: Log in to Azure CLI
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.azure_credentials }}
+      - name: Upload website content to blob storage
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az storage blob upload-batch -d \$web \
+              --account-name stlsdrevampednet \
+              --auth-mode login \
+              -s ./site/static

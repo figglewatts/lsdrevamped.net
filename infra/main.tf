@@ -31,3 +31,9 @@ provider "azurerm" {
   features {}
 }
 
+module "site_content_dir" {
+  source  = "apparentlymart/dir/template"
+  version = "1.0.0"
+
+  base_dir = "${path.module}/../site/static"
+}
