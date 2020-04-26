@@ -14,3 +14,12 @@ resource "azurerm_storage_account" "site_storage_account" {
     index_document = "index.html"
   }
 }
+
+data "azurerm_client_config" "terraform_service_principal" {
+}
+
+resource "azurerm_role_assignment" "terraform_sp_blob_contributor" {
+  scope                = azurerm_storage_account.site_storage_account.id
+  role_definition_name = "Storage Blob Data Contributor"
+  principal_id         = data.azurerm_client_config.terraform_service_principal.object_id
+}
