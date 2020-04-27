@@ -56,3 +56,10 @@ resource "digitalocean_record" "aaaa_site" {
   name   = "@"
   value  = "2001:4b99:1:253::7"
 }
+
+resource "digitalocean_record" "cname_azure_cdn" {
+  domain = digitalocean_domain.lsdrevampednet.id
+  type   = "CNAME"
+  name   = "newsite"
+  value  = "${azurerm_cdn_endpoint.site_cdn_endpoint.host_name}."
+}
