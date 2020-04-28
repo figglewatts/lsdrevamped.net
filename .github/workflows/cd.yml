@@ -54,3 +54,7 @@ jobs:
               --account-name stlsdrevampednet \
               --auth-mode login \
               -s ./site/static
+            az cdn endpoint purge --content-paths '/*' \
+              --resource-group rg-lsdr-site \
+              --profile-name cdn-lsdrevampednet \
+              --name ep-lsdrevampednet
