@@ -2,6 +2,6 @@
 layout: page
 ---
 
-# Download
+## Download
 
 This is the download page.

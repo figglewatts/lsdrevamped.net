@@ -2,7 +2,7 @@
 layout: page
 ---
 
-# About
+## About
 
 <div class="container">
     <div class="row align-items-center">

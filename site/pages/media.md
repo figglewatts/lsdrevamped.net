@@ -2,7 +2,7 @@
 layout: page
 ---
 
-# Media
+## Media
 
 <div class="d-flex flex-wrap">
     {{- range (.Conf.Get "media").Array }}
