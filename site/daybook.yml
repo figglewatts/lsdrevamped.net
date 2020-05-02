@@ -9,7 +9,7 @@ footer-links:
   - text: "Patreon"
     target: "https://www.patreon.com/figglewatts"
   - text: "Itch.io"
-    target: "#"
+    target: "https://figglewatts.itch.io/lsd-revamped"
 data-folders: [ css, img, js ]
 data-files: []
 media:
