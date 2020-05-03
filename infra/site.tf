@@ -54,3 +54,42 @@ resource "azurerm_cdn_endpoint" "site_cdn_endpoint" {
     }
   }
 }
+
+resource "azuread_service_principal" "cdn_service_principal" {
+  application_id = "205478c0-bd83-4e1b-a9d6-db63a3e1e1c8"
+}
+
+
+resource "azurerm_key_vault" "site_cert_keyvault" {
+  name                = "kvlsdrevampednet"
+  resource_group_name = azurerm_resource_group.lsdr_site.name
+  location            = azurerm_resource_group.lsdr_site.location
+  tenant_id           = data.azurerm_client_config.terraform_service_principal.tenant_id
+  sku_name            = "standard"
+}
+
+resource "azurerm_key_vault_access_policy" "terraform_access" {
+  key_vault_id = azurerm_key_vault.site_cert_keyvault.id
+
+  tenant_id = data.azurerm_client_config.terraform_service_principal.tenant_id
+  object_id = data.azurerm_client_config.terraform_service_principal.object_id
+
+  certificate_permissions = [
+    "import", "update"
+  ]
+}
+
+resource "azurerm_key_vault_access_policy" "azure_cdn_access" {
+  key_vault_id = azurerm_key_vault.site_cert_keyvault.id
+
+  tenant_id = data.azurerm_client_config.terraform_service_principal.tenant_id
+  object_id = azuread_service_principal.cdn_service_principal.object_id
+
+  certificate_permissions = [
+    "get", "list"
+  ]
+
+  secret_permissions = [
+    "get", "list"
+  ]
+}

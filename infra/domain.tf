@@ -1,10 +1,6 @@
 resource "digitalocean_project" "lsdr" {
   name      = "LSDR"
-  resources = [digitalocean_domain.lsdrevampednet.urn, digitalocean_spaces_bucket.lsdr_space.urn]
-}
-
-resource "digitalocean_domain" "lsdrevampednet" {
-  name = "lsdrevamped.net"
+  resources = [digitalocean_spaces_bucket.lsdr_space.urn]
 }
 
 resource "digitalocean_spaces_bucket" "lsdr_space" {
@@ -13,53 +9,66 @@ resource "digitalocean_spaces_bucket" "lsdr_space" {
   acl    = "private"
 }
 
-resource "digitalocean_record" "mx_gandi_10" {
-  domain   = digitalocean_domain.lsdrevampednet.id
-  type     = "MX"
-  name     = "@"
-  priority = 10
-  value    = "spool.mail.gandi.net."
+resource "azurerm_dns_zone" "lsdrevampednet" {
+  name                = "lsdrevamped.net"
+  resource_group_name = azurerm_resource_group.lsdr_site.name
 }
 
-resource "digitalocean_record" "mx_gandi_50" {
-  domain   = digitalocean_domain.lsdrevampednet.id
-  type     = "MX"
-  name     = "@"
-  priority = 50
-  value    = "fb.mail.gandi.net."
+resource "azurerm_dns_mx_record" "mx_gandi" {
+  name                = "@"
+  zone_name           = azurerm_dns_zone.lsdrevampednet.name
+  resource_group_name = azurerm_resource_group.lsdr_site.name
+  ttl                 = 1800
+
+  record {
+    preference = 10
+    exchange   = "spool.mail.gandi.net."
+  }
+
+  record {
+    preference = 50
+    exchange   = "fb.mail.gandi.net."
+  }
 }
 
-resource "digitalocean_record" "txt_gandi_spf" {
-  domain = digitalocean_domain.lsdrevampednet.id
-  type   = "TXT"
-  name   = "@"
-  value  = "v=spf1 include:_mailcust.gandi.net ?all"
+resource "azurerm_dns_txt_record" "txt" {
+  name                = "@"
+  zone_name           = azurerm_dns_zone.lsdrevampednet.name
+  resource_group_name = azurerm_resource_group.lsdr_site.name
+  ttl                 = 1800
+
+  record {
+    value = "v=spf1 include:_mailcust.gandi.net ?all"
+  }
+
+  record {
+    value = "google-site-verification=8Kgd48IOr7tCkIL_6-dWPM82YmkKhENpT2sw2i2ACJE"
+  }
 }
 
-resource "digitalocean_record" "cname_site_www" {
-  domain = digitalocean_domain.lsdrevampednet.id
-  type   = "CNAME"
-  name   = "www"
-  value  = "webacc5.sd3.ghst.net."
+resource "azurerm_dns_cname_record" "cname_site_www" {
+  name                = "www"
+  zone_name           = azurerm_dns_zone.lsdrevampednet.name
+  resource_group_name = azurerm_resource_group.lsdr_site.name
+  ttl                 = 1800
+
+  target_resource_id = azurerm_cdn_endpoint.site_cdn_endpoint.id
 }
 
-resource "digitalocean_record" "a_site" {
-  domain = digitalocean_domain.lsdrevampednet.id
-  type   = "A"
-  name   = "@"
-  value  = "155.133.132.7"
+resource "azurerm_dns_a_record" "a_site" {
+  name                = "@"
+  zone_name           = azurerm_dns_zone.lsdrevampednet.name
+  resource_group_name = azurerm_resource_group.lsdr_site.name
+  ttl                 = 1800
+
+  target_resource_id = azurerm_cdn_endpoint.site_cdn_endpoint.id
 }
 
-resource "digitalocean_record" "aaaa_site" {
-  domain = digitalocean_domain.lsdrevampednet.id
-  type   = "AAAA"
-  name   = "@"
-  value  = "2001:4b99:1:253::7"
-}
+resource "azurerm_dns_aaaa_record" "a_site" {
+  name                = "@"
+  zone_name           = azurerm_dns_zone.lsdrevampednet.name
+  resource_group_name = azurerm_resource_group.lsdr_site.name
+  ttl                 = 1800
 
-resource "digitalocean_record" "cname_azure_cdn" {
-  domain = digitalocean_domain.lsdrevampednet.id
-  type   = "CNAME"
-  name   = "newsite"
-  value  = "${azurerm_cdn_endpoint.site_cdn_endpoint.host_name}."
+  target_resource_id = azurerm_cdn_endpoint.site_cdn_endpoint.id
 }
