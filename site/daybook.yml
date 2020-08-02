@@ -10,7 +10,9 @@ footer-links:
     target: "https://www.patreon.com/figglewatts"
   - text: "Itch.io"
     target: "https://figglewatts.itch.io/lsd-revamped"
-data-folders: [ css, img, js ]
+  - text: "Discord"
+    target: "https://discordapp.com/invite/kB8Fcfk"
+data-folders: [css, img, js]
 data-files: []
 media:
   - "001"
