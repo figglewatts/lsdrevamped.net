@@ -18,6 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 0.13.x
 
       - name: Terraform format
         run: terraform fmt -check infra
