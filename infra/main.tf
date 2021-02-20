@@ -1,5 +1,4 @@
 terraform {
-  required_version = ">= 0.12"
   backend "s3" {
     skip_requesting_account_id  = true
     skip_credentials_validation = true
@@ -12,8 +11,6 @@ terraform {
 }
 
 provider "digitalocean" {
-  version = "=2.5.1"
-
   spaces_access_id  = var.digitalocean_spaces_key
   spaces_secret_key = var.digitalocean_spaces_secret_key
 
@@ -21,8 +18,6 @@ provider "digitalocean" {
 }
 
 provider "azurerm" {
-  version = "=2.6.0"
-
   subscription_id = var.subscription_id
   client_id       = var.client_id
   client_secret   = var.client_secret
@@ -32,8 +27,6 @@ provider "azurerm" {
 }
 
 provider "azuread" {
-  version = "=0.7.0"
-
   subscription_id = var.subscription_id
   client_id       = var.client_id
   client_secret   = var.client_secret
