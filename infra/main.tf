@@ -12,7 +12,7 @@ terraform {
 }
 
 provider "digitalocean" {
-  version = "=1.16.0"
+  version = "=2.5.1"
 
   spaces_access_id  = var.digitalocean_spaces_key
   spaces_secret_key = var.digitalocean_spaces_secret_key
