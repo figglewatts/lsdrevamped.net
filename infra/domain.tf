@@ -55,15 +55,6 @@ resource "azurerm_dns_cname_record" "cname_site_www" {
   target_resource_id = azurerm_cdn_endpoint.site_cdn_endpoint.id
 }
 
-resource "azurerm_dns_cname_record" "cname_site_research" {
-  name                = "research"
-  zone_name           = azurerm_dns_zone.lsdrevampednet.name
-  resource_group_name = azurerm_resource_group.lsdr_site.name
-  ttl                 = 1800
-
-  record = "hosting.gitbook.io"
-}
-
 resource "azurerm_dns_cname_record" "cname_site_docs" {
   name                = "docs"
   zone_name           = azurerm_dns_zone.lsdrevampednet.name
