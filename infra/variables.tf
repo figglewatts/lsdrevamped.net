@@ -25,3 +25,8 @@ variable "digitalocean_spaces_key" {
 variable "digitalocean_spaces_secret_key" {
   type = string
 }
+
+variable "cert_function_identity_object_id" {
+  type    = string
+  default = "551d93ce-75c1-45af-8b0e-77bc6e0ff0e4"
+}

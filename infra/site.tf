@@ -93,3 +93,14 @@ resource "azurerm_key_vault_access_policy" "azure_cdn_access" {
     "get", "list"
   ]
 }
+
+resource "azurerm_key_vault_access_policy" "cert_function_access" {
+  key_vault_id = azurerm_key_vault.site_cert_keyvault.id
+
+  tenant_id = data.azurerm_client_config.terraform_service_principal.tenant_id
+  object_id = var.cert_function_identity_object_id
+
+  certificate_permissions = [ 
+    "get", "list", "update", "import"
+  ]
+}
