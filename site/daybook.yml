@@ -6,8 +6,6 @@ footer-links:
     target: "https://blog.figglewatts.co.uk/"
   - text: "Twitter"
     target: "https://twitter.com/figglewatts/"
-  - text: "Patreon"
-    target: "https://www.patreon.com/figglewatts"
   - text: "Itch.io"
     target: "https://figglewatts.itch.io/lsd-revamped"
   - text: "Discord"
