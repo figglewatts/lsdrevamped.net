@@ -17,9 +17,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      
-      - uses: hashicorp/setup-terraform@v1
+      - uses: actions/checkout@v3
+
+      - uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 0.14.x
 
@@ -36,11 +36,11 @@ jobs:
         run: terraform plan --out=tfplan --input=false infra
       - name: Terraform apply
         run: terraform apply --input=false tfplan
-      
+
       - name: Set up Go version
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v4
         with:
-          go-version: "1.14.1"
+          go-version: "stable"
       - name: Generate site with daybookr
         run: |
           go get -u github.com/figglewatts/daybookr/cmd/daybookr
