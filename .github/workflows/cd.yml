@@ -43,7 +43,7 @@ jobs:
           go-version: "stable"
       - name: Generate site with daybookr
         run: |
-          go get -u github.com/figglewatts/daybookr/cmd/daybookr
+          go install github.com/figglewatts/daybookr/cmd/daybookr@latest
           daybookr generate site
 
       - name: Log in to Azure CLI
