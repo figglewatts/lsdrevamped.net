@@ -55,6 +55,7 @@ jobs:
         with:
           inlineScript: |
             az storage blob upload-batch -d \$web \
+              --overwrite \
               --account-name stlsdrevampednet \
               --auth-mode login \
               -s ./site/static
