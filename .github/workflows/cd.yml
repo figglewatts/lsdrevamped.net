@@ -2,40 +2,11 @@ name: CD
 on:
   push:
     branches: [master]
-env:
-  TF_BACKEND_BUCKET: ${{ secrets.tf_backend_bucket }}
-  TF_BACKEND_ACCESS_KEY: ${{ secrets.tf_backend_access_key }}
-  TF_BACKEND_SECRET_KEY: ${{ secrets.tf_backend_secret_key }}
-  TF_VAR_client_id: ${{ secrets.azure_client_id }}
-  TF_VAR_client_secret: ${{ secrets.azure_client_secret }}
-  TF_VAR_subscription_id: ${{ secrets.azure_subscription_id }}
-  TF_VAR_tenant_id: ${{ secrets.azure_tenant_id }}
-  TF_VAR_digitalocean_token: ${{ secrets.digitalocean_token }}
-  TF_VAR_digitalocean_spaces_key: ${{ secrets.digitalocean_spaces_key }}
-  TF_VAR_digitalocean_spaces_secret_key: ${{ secrets.digitalocean_spaces_secret_key }}
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
-      - uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 0.14.x
-
-      - name: Terraform format
-        run: terraform fmt -check infra
-      - name: Terraform init
-        run: |
-          terraform init --input=false \
-            -backend-config "bucket=$TF_BACKEND_BUCKET" \
-            -backend-config "access_key=$TF_BACKEND_ACCESS_KEY" \
-            -backend-config "secret_key=$TF_BACKEND_SECRET_KEY" \
-            infra
-      - name: Terraform plan
-        run: terraform plan --out=tfplan --input=false infra
-      - name: Terraform apply
-        run: terraform apply --input=false tfplan
 
       - name: Set up Go version
         uses: actions/setup-go@v4
@@ -46,20 +17,10 @@ jobs:
           go install github.com/figglewatts/daybookr/cmd/daybookr@latest
           daybookr generate site
 
-      - name: Log in to Azure CLI
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.azure_credentials }}
-      - name: Upload website content to blob storage
-        uses: azure/CLI@v1
-        with:
-          inlineScript: |
-            az storage blob upload-batch -d \$web \
-              --overwrite \
-              --account-name stlsdrevampednet \
-              --auth-mode login \
-              -s ./site/static
-            az cdn endpoint purge --content-paths '/*' \
-              --resource-group rg-lsdr-site \
-              --profile-name cdn-lsdrevampednet \
-              --name ep-lsdrevampednet
+      - name: Login to Vultr Registry
+        run: docker login ${{ secrets.VULTR_REGISTRY }} -u ${{ secrets.VULTR_USER }} -p ${{ secrets.VULTR_PASSWORD }}
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t ${{ secrets.VULTR_REGISTRY }}/lsdrevampednet:latest .
+          docker push ${{ secrets.VULTR_REGISTRY }}/lsdrevampednet:latest
