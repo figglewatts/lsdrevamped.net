@@ -17,10 +17,10 @@ jobs:
           go install github.com/figglewatts/daybookr/cmd/daybookr@latest
           daybookr generate site
 
-      - name: Login to Vultr Registry
-        run: docker login ${{ secrets.VULTR_REGISTRY }} -u ${{ secrets.VULTR_USER }} -p ${{ secrets.VULTR_PASSWORD }}
+      - name: Login to Registry
+        run: docker login ${{ secrets.REGISTRY_NAME }} -u ${{ secrets.REGISTRY_USER }} -p ${{ secrets.REGISTRY_PASSWORD }}
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ secrets.VULTR_REGISTRY }}/lsdrevampednet:latest .
-          docker push ${{ secrets.VULTR_REGISTRY }}/lsdrevampednet:latest
+          docker build -t ${{ secrets.REGISTRY_NAME }}/lsdrevampednet:latest .
+          docker push ${{ secrets.REGISTRY_NAME }}/lsdrevampednet:latest
