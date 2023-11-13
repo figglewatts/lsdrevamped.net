@@ -6,6 +6,6 @@ layout: page
 
 <div class="d-flex flex-wrap">
     {{- range (.Conf.Get "media").Array }}
-    <a href="./img/game/{{ . }}.png" target="_blank" class="w-100 my-2"><img class="img-fluid" src="./img/game/{{ . }}-thumb.png"/></a>
+    <a href="./img/0.2/{{ . }}.png" target="_blank" class="w-100 my-2"><img class="img-fluid" src="./img/0.2/{{ . }}.png"/></a>
     {{- end }}
 </div>

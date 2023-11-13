@@ -287,20 +287,35 @@ layout: page
             <a href="./img/old/2019-01-27.gif" target="_blank">
                 <img class="w-100" src="./img/old/2019-01-27.gif"/>
             </a>
-            <figcaption>27th January, 2019: Looks just like the real thing.</figcaption>
+            <figcaption>27th January, 2019: Looking good.</figcaption>
         </figure>
     </div>
     <hr class="w-25 mb-4">
     <div class="row align-items-center">
         <p class="col-sm align-middle">
-            Which brings us to today. The next version is almost ready for release. It's been a journey,
-            and will continue to be. I'll update this about page as more stuff happens.
+            It's 2020 and the pandemic is in full swing. A new version of LSD:R is released which is
+            basically a rewrite incorporating all of the things we'd learned so far. It's the final rewrite
+            and serves as a stable foundation upon which the rest of the game is built.
         </p>
         <figure class="col-sm">
             <a href="./img/old/2019-07-14.webp" target="_blank">
                 <img class="w-100" src="./img/old/2019-07-14.webp"/>
             </a>
-            <figcaption>Today: The next version is ready.</figcaption>
+            <figcaption>3rd May, 2020: Version 0.1.</figcaption>
+        </figure>
+    </div>
+    <hr class="w-25 mb-4">
+    <div class="row align-items-center">
+        <p class="col-sm align-middle order-first order-sm-last">
+            A couple of years pass with me working various jobs while chipping away at LSD:R progress, mostly
+            laying the groundwork for adding interactive objects, then adding them.
+            In late 2023 0.2 is released, which contains every interactive object in the game.
+        </p>
+        <figure class="col-sm order-last order-sm-first">
+            <a href="./img/sumos.gif" target="_blank">
+                <img class="w-100" src="./img/sumos.gif"/>
+            </a>
+            <figcaption>13th November, 2023: Version 0.2.</figcaption>
         </figure>
     </div>
 </div>
