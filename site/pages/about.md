@@ -318,4 +318,18 @@ layout: page
             <figcaption>13th November, 2023: Version 0.2.</figcaption>
         </figure>
     </div>
+    <hr class="w-25 mb-4">
+    <div class="row align-items-center">
+        <p class="col-sm align-middle">
+            Another year passes with me working a job while still chipping away at LSD:R. This time I'm adding the last
+            few pieces of functionality to make the game 99% accurate, I'm working on the mod tools for people to make
+            their own dreams, and I'm making an example mod containing some additional dreams to showcase the tools.
+        </p>
+        <figure class="col-sm">
+            <a href="./img/old/2024-05-19.gif" target="_blank">
+                <img class="w-100" src="./img/old/2024-05-19.gif"/>
+            </a>
+            <figcaption>15th October, 2024: Version 0.3 is released, containing 'Additional Dreams', the game's first mod.</figcaption>
+        </figure>
+    </div>
 </div>
